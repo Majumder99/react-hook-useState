@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
 function App() {
+  const [state, setState] = useState({ count: 0, theme: "blue" });
+  const count = state.count;
+  const theme = state.theme;
+  const handleMinusState = () => {
+    // setState(state + 1);//This is not good
+    // setState((prevCount) => prevCount - 1); //Because this will is better
+    setState((preCount) => ({ ...preCount, count: count - 1 }));
+  };
+  const handlePlusState = () => {
+    // setState(state + 1);
+    // setState((prev) => prev + 1);
+    setState((preCount) => ({ ...preCount, count: count + 1 }));
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <button onClick={handleMinusState}>-</button>
+      <button>{count}</button>
+      <button>{theme}</button>
+      <button onClick={handlePlusState}>+</button>
+    </>
   );
 }
 
